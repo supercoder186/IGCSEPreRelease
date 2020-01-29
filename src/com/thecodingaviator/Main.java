@@ -11,6 +11,8 @@ public class Main {
         int priceAfterEvening = 2;
         int day = -1;
         Scanner in = new Scanner(System.in);
+
+
         boolean isValid;
         do {
             System.out.print("Enter the day: ");
@@ -19,14 +21,29 @@ public class Main {
             if (!isValid) System.out.println("Invalid day! Enter again!");
             else day = Arrays.asList(days).indexOf(choice);
         } while (!isValid);
+
+
         isValid = false;
         int arrivalTime = 0;
-        do{
+        do {
             System.out.print("Enter the arrival hour: ");
             int choice = in.nextInt();
             isValid = choice >= 8 && choice < 24;
-            if(!isValid) System.out.println("Arrival time is invalid!");
+            if (!isValid) System.out.println("Arrival time is invalid!");
             else arrivalTime = choice;
-        }while(!isValid);
+        } while (!isValid);
+
+
+        isValid = false;
+        int duration = 0;
+        do {
+            System.out.print("Enter the duration of stay: ");
+            int maxPossibleStay = mayStays[day];
+            int choice = in.nextInt();
+            isValid = choice <= maxPossibleStay && choice > 0;
+            if (!isValid) System.out.println("Duration of stay is invalid!");
+            else duration = choice;
+        } while (!isValid);
+
     }
 }
