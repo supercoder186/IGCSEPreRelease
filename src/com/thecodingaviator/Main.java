@@ -16,7 +16,7 @@ public class Main {
         boolean isValid;
         do {
             System.out.print("Enter the day: ");
-            String choice = in.nextLine();
+            String choice = in.nextLine().toLowerCase();
             isValid = Arrays.asList(days).contains(choice);
             if (!isValid) System.out.println("Invalid day! Enter again!");
             else day = Arrays.asList(days).indexOf(choice);
@@ -39,11 +39,45 @@ public class Main {
         do {
             System.out.print("Enter the duration of stay: ");
             int maxPossibleStay = mayStays[day];
+            if (arrivalTime >= 16) maxPossibleStay = 24 - arrivalTime;
             int choice = in.nextInt();
             isValid = choice <= maxPossibleStay && choice > 0;
             if (!isValid) System.out.println("Duration of stay is invalid!");
             else duration = choice;
         } while (!isValid);
 
+        isValid = false;
+        boolean isFrequentParker = false;
+        do {
+            System.out.print("Are you a frequent parker? (0/1): ");
+            int choice = in.nextInt();
+            isValid = (choice >= 0) && (choice <= 1);
+            if (!isValid) System.out.println("Invalid input!");
+            else isFrequentParker = choice == 1;
+        } while (!isValid);
+
+        if (isFrequentParker) {
+            System.out.print("Enter the frequent parking number: ");
+            int number = in.nextInt();
+            if (number > 99999 || number < 10000) isFrequentParker = false;
+            else {
+                int temp = 0;
+                int i = 0;
+                do {
+                    temp += (5 - i) * (number % 10);
+                    number -= number % 10;
+                    number /= 10;
+                    i++;
+                } while (number > 0);
+                if (temp % 11 != 0) isFrequentParker = false;
+            }
+            if (!isFrequentParker) System.out.println("Frequent parking number is invalid!");
+        }
+
+        double discount = arrivalTime >= 16 ? 0.5 : 0.9;
+
+        if(arrivalTime > 16){
+            exitTime = arrivalTime + duration;
+        }
     }
 }
