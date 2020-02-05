@@ -23,7 +23,6 @@ public class Main {
         } while (!isValid);
 
 
-        isValid = false;
         int arrivalTime = 0;
         do {
             System.out.print("Enter the arrival hour: ");
@@ -34,7 +33,6 @@ public class Main {
         } while (!isValid);
 
 
-        isValid = false;
         int duration = 0;
         do {
             System.out.print("Enter the duration of stay: ");
@@ -46,7 +44,6 @@ public class Main {
             else duration = choice;
         } while (!isValid);
 
-        isValid = false;
         boolean isFrequentParker = false;
         do {
             System.out.print("Are you a frequent parker? (0/1): ");
@@ -75,9 +72,20 @@ public class Main {
         }
 
         double discount = arrivalTime >= 16 ? 0.5 : 0.9;
-
-        if(arrivalTime > 16){
-            exitTime = arrivalTime + duration;
+        double price;
+        if (arrivalTime > 16) {
+            price = duration * priceAfterEvening;
+        } else {
+            int exitTime = arrivalTime + duration;
+            if (exitTime > 16)
+                price = ((16 - arrivalTime) * pricesBeforeEvening[day]) + (exitTime - 16) * priceAfterEvening;
+            else
+                price = duration * pricesBeforeEvening[day];
         }
+
+        price *= discount;
+
+        System.out.println("The price is " + price);
+        System.out.println("The discount applied was " + (100 - (discount * 100)));
     }
 }
