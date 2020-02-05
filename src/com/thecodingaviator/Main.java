@@ -11,7 +11,7 @@ public class Main {
         int priceAfterEvening = 2;
         int day = -1;
         Scanner in = new Scanner(System.in);
-        int currentday = -1;
+        int currentDay = -1;
         double dailyTotal = 0;
 
         //noinspection InfiniteLoopStatement
@@ -100,12 +100,12 @@ public class Main {
                 else payed = choice;
             } while (!isValid);
 
-            if(day == currentday){
+            if(day == currentDay){
                 dailyTotal += payed;
             }else{
                 System.out.println("Total for previous day was " + dailyTotal);
                 dailyTotal = payed;
-                currentday = day;
+                currentDay = day;
             }
         }
     }
